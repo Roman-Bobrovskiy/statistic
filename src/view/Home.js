@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import actionsTypes from "../redux/Statistic/statisticAction";
 import requests from "../utils/request";
@@ -10,13 +10,15 @@ import InfoBox from "../components/Main/InfoBox/InfoBox";
 import styles from "./Home.module.css";
 
 function Home({ countryList, err, load, getDataToState }) {
-  countryList.length === 0 && load(false);
-  countryList.length === 0 &&
-    requests
-      .getData()
-      .then((obj) => getDataToState(obj.data.Countries))
-      .catch((error) => err(true))
-      .finally(() => load(false));
+  useEffect(() => {
+    load(true);
+    countryList.length === 0 &&
+      requests
+        .getData()
+        .then((obj) => getDataToState(obj.data.Countries))
+        .catch((error) => err(true))
+        .finally(() => load(false));
+  }, [countryList.length, err, load, getDataToState]);
 
   return (
     <>
@@ -34,6 +36,7 @@ function Home({ countryList, err, load, getDataToState }) {
     </>
   );
 }
+
 let mapStateToProps = (state) => {
   return state.state;
 };

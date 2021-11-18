@@ -1,6 +1,5 @@
 let routes = {
-  home: "/",
-  citypage: "/city",
+  home: "/statistic",
 };
 
 export default routes;

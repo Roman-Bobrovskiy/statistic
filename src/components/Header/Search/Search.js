@@ -1,11 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import actionsTypes from "../../../redux/Statistic/statisticAction";
 
 import styles from "./Search.module.css";
 
-export default function Search() {
+function Search({ onchangeFilter }) {
   return (
     <form className={styles.searchForm}>
-      <input className={styles.searchInput} type="text" placeholder="Search" />
+      <input
+        className={styles.searchInput}
+        type="text"
+        placeholder="Search..."
+        onChange={(evt) => onchangeFilter(evt.target.value)}
+      />
       <button className={styles.submitBtn} type="submit">
         <svg
           width="30"
@@ -23,3 +31,13 @@ export default function Search() {
     </form>
   );
 }
+
+let mapDispatchToProps = {
+  onchangeFilter: actionsTypes.changeFilter,
+};
+
+Search.propTypes = {
+  onchangeFilter: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Search);
