@@ -6,6 +6,7 @@ import actionsTypes from "../../../redux/Statistic/statisticAction";
 import styles from "./Modal.module.css";
 
 function Modal({ data, toggle, currentId }) {
+  //close modal window by ESC
   useEffect(() => {
     let handleEsc = (event) => {
       event.keyCode === 27 && toggle(false);
@@ -18,6 +19,7 @@ function Modal({ data, toggle, currentId }) {
   }, [toggle]);
 
   return (
+    //modal window body
     <>
       <div onClick={() => toggle(false)} className={styles.backdrop}>
         {data.map(

@@ -16,15 +16,17 @@ function InfoBox({
   sortNumber,
   getID,
 }) {
+  //open modal window
   let openModal = (id) => {
     getID(id);
     !windowCondition && toggle(true);
   };
   let number = 1;
   return (
+    //body
     <>
       {windowCondition && visible.length !== 0 && (
-        <Modal data={visible} currentId={id} />
+        <Modal data={visible} currentId={id} /> //Modal window
       )}
       <div className={styles.wrapInfoBox}>
         <div className={styles.titleWrap}>
