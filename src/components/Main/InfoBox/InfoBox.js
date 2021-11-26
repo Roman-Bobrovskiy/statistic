@@ -17,8 +17,8 @@ function InfoBox({
   getID,
 }) {
   //open modal window
-  let openModal = (id) => {
-    getID(id);
+  let openModal = (e) => {
+    getID(e.target.attributes.id.value);
     !windowCondition && toggle(true);
   };
   let number = 1;
@@ -52,19 +52,21 @@ function InfoBox({
             <option value="↓">↓</option>
           </select>
         </div>
-        <ul className={styles.infoBox}>
+        <ul onClick={(e) => openModal(e)} className={styles.infoBox}>
           {visible.length !== 0 &&
             visible.map((obj) => (
-              <li
-                className={styles.infoItems}
-                onClick={() => openModal(obj.ID)}
-                key={obj.ID}
-              >
-                <div className={styles.wrapInfoNameCountry}>
-                  <span className={styles.infoNumber}>{number++}</span>
-                  <span className={styles.infoText}>{obj.Country}</span>
+              <li id={obj.ID} className={styles.infoItems} key={obj.ID}>
+                <div id={obj.ID} className={styles.wrapInfoNameCountry}>
+                  <span id={obj.ID} className={styles.infoNumber}>
+                    {number++}
+                  </span>
+                  <span id={obj.ID} className={styles.infoText}>
+                    {obj.Country}
+                  </span>
                 </div>
-                <span className={styles.infoText}>{obj.TotalConfirmed}</span>
+                <span id={obj.ID} className={styles.infoText}>
+                  {obj.TotalConfirmed}
+                </span>
               </li>
             ))}
         </ul>
